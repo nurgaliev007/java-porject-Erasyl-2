@@ -1,0 +1,123 @@
+
+class MainTest {
+
+    1)Test
+    void cartShouldCalculateTotalPrice() {
+        Cart cart = new Cart();
+
+        Product laptop = new Product(1, "Laptop", 300000);
+        Product phone = new Product(2, "Phone", 200000);
+        Product headphones = new Product(3, "Headphones", 50000);
+
+        cart.addProduct(laptop);
+        cart.addProduct(phone);
+        cart.addProduct(headphones);
+
+        assertEquals(550000.0, cart.calculateTotal(), 0.001);
+        assertEquals(3, cart.products.size());
+    }
+
+    2)Test
+    void cartShouldStartEmpty() {
+        Cart cart = new Cart();
+
+        assertTrue(cart.products.isEmpty());
+        assertEquals(0.0, cart.calculateTotal(), 0.001);
+    }
+
+    3)Test
+    void orderShouldSaveTotalAndStatus() {
+        Order order = new Order();
+
+        order.id = 101;
+        order.calculateTotal(550000);
+        order.updateStatus(OrderStatus.NEW);
+
+        assertEquals(101, order.id);
+        assertEquals(550000.0, order.totalAmount, 0.001);
+        assertEquals(OrderStatus.NEW, order.status);
+
+        order.updateStatus(OrderStatus.CONFIRMED);
+
+        assertEquals(OrderStatus.CONFIRMED, order.status);
+    }
+
+    4)Test
+    void orderItemShouldCalculateSubtotal() {
+        Product product = new Product(1, "Phone", 200000);
+
+        OrderItem item = new OrderItem();
+        item.product = product;
+        item.quantity = 2;
+
+        assertEquals(400000.0, item.calculateSubtotal(), 0.001);
+    }
+
+    5)Test
+    void highCreditScoreShouldReturnHighRating() {
+        Customer customer = new PersonalCustomer(
+                1, "Ali", 780, "123456"
+        );
+
+        CreditScoringService scoring = new CreditScoringService();
+
+        assertEquals(CreditRating.HIGH, scoring.checkScore(customer));
+    }
+
+    6)Test
+    void mediumCreditScoreShouldReturnMediumRating() {
+        Customer customer = new PersonalCustomer(
+                2, "Dana", 700, "654321"
+        );
+
+        CreditScoringService scoring = new CreditScoringService();
+
+        assertEquals(CreditRating.MEDIUM, scoring.checkScore(customer));
+    }
+
+    7)Test
+    void lowCreditScoreShouldReturnLowRating() {
+        Customer customer = new PersonalCustomer(
+                3, "Arman", 600, "111222"
+        );
+
+        CreditScoringService scoring = new CreditScoringService();
+
+        assertEquals(CreditRating.LOW, scoring.checkScore(customer));
+    }
+
+    8)Test
+    void lowScoreShouldNotApproveCreditOrInstallment() {
+        Customer customer = new PersonalCustomer(
+                4, "Nurlan", 600, "333444"
+        );
+
+        CreditScoringService scoring = new CreditScoringService();
+
+        assertFalse(scoring.approvePayment(customer, PaymentType.CREDIT));
+        assertFalse(scoring.approvePayment(customer, PaymentType.INSTALLMENT));
+    }
+
+    9)Test
+    void highScoreShouldApproveCreditAndInstallment() {
+        Customer customer = new PersonalCustomer(
+                5, "Aruzhan", 800, "555666"
+        );
+
+        CreditScoringService scoring = new CreditScoringService();
+
+        assertTrue(scoring.approvePayment(customer, PaymentType.CREDIT));
+        assertTrue(scoring.approvePayment(customer, PaymentType.INSTALLMENT));
+    }
+
+    10)Test
+    void customerCreditRatingCanBeUpdated() {
+        Customer customer = new PersonalCustomer(
+                6, "Ali", 600, "123456"
+        );
+
+        customer.updateCreditRating(760);
+
+        assertEquals(760, customer.getCreditScore());
+    }
+}
