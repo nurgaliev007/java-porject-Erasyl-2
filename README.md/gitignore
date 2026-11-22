@@ -1,11 +1,11 @@
-# Maven
+# Maven құрастыру нәтижелері
 target/
 
-# IntelliJ IDEA
+# IntelliJ IDEA файлдары
 .idea/
 *.iml
 
-# Java
+# Java компиляцияланған файлдары
 *.class
 
 # Жүйелік файлдар
