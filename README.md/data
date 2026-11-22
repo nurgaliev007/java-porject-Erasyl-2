@@ -1,1 +1,44 @@
+CSV
+
+id,name,price
+1,Laptop,300000
+2,Phone,200000
+3,Headphones,50000
+
+
+new Product(1, "Laptop", 300000);
+new Product(2, "Phone", 200000);
+new Product(3, "Headphones", 50000);
+
+
+
+JSON
+
+{
+  "personalCustomer": {
+    "id": 1,
+    "name": "Ali",
+    "creditScore": 780,
+    "creditCardNumber": "123456"
+  },
+  "corporateCustomer": {
+    "id": 2,
+    "name": "Company",
+    "creditScore": 820,
+    "contactPerson": "Arman",
+    "companyBalance": 1000000
+  }
+}
+
+
+new PersonalCustomer(1, "Ali", 780, "123456");
+
+new CorporateCustomer(
+    2,
+    "Company",
+    820,
+    "Arman",
+    1000000
+);
+
 
