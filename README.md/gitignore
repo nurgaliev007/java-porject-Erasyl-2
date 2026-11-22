@@ -1,5 +1,5 @@
 # Maven құрастыру нәтижелері
-target/
+marketplace/
 
 # IntelliJ IDEA файлдары
 .idea/
